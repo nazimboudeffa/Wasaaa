@@ -2,7 +2,7 @@
 
 require_once $global['systemRootPath'] . 'plugin/Plugin.abstract.php';
 
-class Wasabi extends PluginAbstract {
+class Wasaaa extends PluginAbstract {
 
     public function getDescription() {
         return "Manage Wasabi Videos Informations";
