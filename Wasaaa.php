@@ -25,8 +25,17 @@ class Wasaaa extends PluginAbstract {
     }
 
     public function getEmptyDataObject() {
-      $obj = new stdClass();
-      $obj->key = 'Your Wasabi Generated Key';
-      return $obj;
+        $obj = new stdClass();
+        $obj->API_KEY = 'Your Wasabi Generated Key';
+        return $obj;
+    }
+
+    public function getUploadMenuButton(){
+        global $global;
+        $obj = $this->getDataObject();
+        if($obj->onlyAdminCanBulkEmbed && !User::isAdmin()){
+            return '';
+        }
+        return '<li><a  href="'.$global['webSiteRootURL'].'plugin/Wasaaa/search.php" ><span class="fa fa-link"></span> '.__("Wasabi Embed").'</a></li>';
     }
 }
