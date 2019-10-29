@@ -9,7 +9,7 @@ class Wasaaa extends PluginAbstract {
     }
 
     public function getName() {
-        return "Wasabi API";
+        return "Wasaaa";
     }
 
     public function getUUID() {
@@ -25,10 +25,9 @@ class Wasaaa extends PluginAbstract {
     }
 
     public function getEmptyDataObject() {
-        return "";
-    }
-
-    public function getHeadCode() {
-        return "";
+      $obj = new stdClass();
+      $obj->aCheckbox = false;
+      $obj->aTextFiels = 'The default value';
+      return $obj;
     }
 }
