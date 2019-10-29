@@ -21,13 +21,12 @@ class Wasaaa extends PluginAbstract {
     }
 
     public function getTags() {
-        return array('free', 'wasabi', 'video player');
+        return array('free', 'wasabi', 'video');
     }
 
     public function getEmptyDataObject() {
       $obj = new stdClass();
-      $obj->aCheckbox = false;
-      $obj->aTextFiels = 'The default value';
+      $obj->key = 'Your Wasabi Generated Key';
       return $obj;
     }
 }
