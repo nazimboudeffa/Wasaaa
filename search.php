@@ -159,6 +159,7 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
                });
 
                var sel = $('<select>').appendTo('body');
+                sel.append($("<option>").text("Please select a bucket").prop('disabled', true).prop('selected', true));
                buckets.forEach(function(element) {
                 sel.append($("<option>").attr('value',element.bucket).text(element.bucket));
                });
