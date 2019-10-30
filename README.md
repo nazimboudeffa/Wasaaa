@@ -1,6 +1,6 @@
 # Wasaaa
 
-Wasaaa is a plugin for YouPHPTube to let you access your videos stored on Wasabi
+Wasaaa is a plugin for YouPHPTube to let you access your videos stored on Wasabi.com
 
 ## Usage
 
