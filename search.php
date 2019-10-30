@@ -103,12 +103,14 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
                     <form id="search-form" name="search-form" onsubmit="return search()">
                         <div id="custom-search-input">
                             <div class="input-group col-md-12">
+                              <!--
                                 <input type="search" id="query" class="form-control input-lg" placeholder="Search Your Wasabi Buckets" />
                                 <span class="input-group-btn">
                                     <button class="btn btn-info btn-lg" type="submit">
                                         <i class="glyphicon glyphicon-search"></i>
                                     </button>
                                 </span>
+                              -->
                             </div>
                         </div>
                     </form>
@@ -123,8 +125,7 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
                     </div>
                 </div>
                 <div class="panel-body">
-                    <ul id="results"></ul>
-                    <div id="buttons"></div>
+                    <ul id="results" class="list-group"></ul>
                 </div>
             </div>
         </div>
@@ -144,23 +145,79 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
                 secretAccessKey: secretAccessKey
             });
 
-            var params = {
-                Bucket: 'bledtube'
-            };
+            var params = {};
+            s3.listBuckets(params, function(err, data) {
+             if (err) console.log(err, err.stack);
+             else {
 
-            s3.listObjectsV2(params, function (err, data) {
-                if (!err) {
-                    var files = []
-                    data.Contents.forEach(function (element) {
-                        files.push({
-                            filename: element.Key
-                        });
-                    });
-                    console.log(files)
-                } else {
-                    console.log(err);  // an error ocurred
-                }
+               var buckets = [];
+
+               data.Buckets.forEach(function (element) {
+                   buckets.push({
+                       bucket: element.Name
+                   });
+               });
+
+               var sel = $('<select>').appendTo('body');
+               buckets.forEach(function(element) {
+                sel.append($("<option>").attr('value',element.bucket).text(element.bucket));
+               });
+               $(sel).attr('id', "buckets");
+               $(sel).addClass('form-control');
+               $('#custom-search-input').append(sel);
+             }
             });
+
+            $(document).ready(function () {
+              $('#buckets').on('change', function(){
+                search($('#buckets option:selected').val());
+              });
+            });
+
+            function search(bucket){
+
+              var params = {
+                  Bucket: bucket
+              };
+
+              var files = [];
+
+              s3.listObjectsV2(params, function (err, data) {
+                  if (!err) {
+                      data.Contents.forEach(function (element) {
+                          files.push({
+                              filename: element.Key
+                          });
+                      });
+
+                      $('#results').html('');
+                      $.each(files, function (i, file) {
+                          // Get Output
+                          var output = getOutput(file);
+                          // display results
+                          $('#results').append(output);
+                      });
+
+                  } else {
+                      console.log(err);  // an error ocurred
+                  }
+              });
+
+            }
+
+            function getOutput(item) {
+
+              var title = item.filename;
+              // Build output string
+              var output = '<li class="list-group-item">' +
+                      '<div class="checkbox">' +
+                      '<label><input class="checkbox-inline" type="checkbox" value="' + title + '" name="videoCheckbox">' + title + '<a target="_blank" href="https://s3.us-west-1.wasabisys.com/bledtube/' + title + '?rel=0"> watch</a></label>' +
+                      '</div>' +
+                      '</li>' +
+                      '';
+              return output;
+
+            }
 
         </script>
     </body>
