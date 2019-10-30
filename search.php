@@ -193,7 +193,7 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
                       $('#results').html('');
                       $.each(files, function (i, file) {
                           // Get Output
-                          var output = getOutput(file);
+                          var output = getOutput(bucket, file);
                           // display results
                           $('#results').append(output);
                       });
@@ -205,13 +205,13 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
 
             }
 
-            function getOutput(item) {
+            function getOutput(b, f) {
 
-              var title = item.filename;
+              var title = f.filename;
               // Build output string
               var output = '<li class="list-group-item">' +
                       '<div class="checkbox">' +
-                      '<label><input class="checkbox-inline" type="checkbox" value="' + title + '" name="videoCheckbox">' + title + '<a target="_blank" href="https://s3.us-west-1.wasabisys.com/bledtube/' + title + '?rel=0"> watch</a></label>' +
+                      '<label><input class="checkbox-inline" type="checkbox" value="' + title + '" name="videoCheckbox">' + title + '<a target="_blank" href="https://s3.' + '<?php echo $obj->REGION; ?>' + '.wasabisys.com/' + b + '/' + title + '?rel=0"> watch</a></label>' +
                       '</div>' +
                       '</li>' +
                       '';

@@ -28,6 +28,7 @@ class Wasaaa extends PluginAbstract {
         $obj = new stdClass();
         $obj->API_KEY = 'Your Wasabi Generated Key';
         $obj->API_SECRET = 'Your Wasabi Secret Key';
+        $obj->REGION = 'us-west-1';
         return $obj;
     }
 
