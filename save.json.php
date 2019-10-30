@@ -31,7 +31,7 @@ if (empty($objo) || ($objo->onlyAdminCanWasabiEmbed && !User::isAdmin())) {
         $videos->setTitle($value['title']);
         $videos->setDescription("");
         $videos->setClean_title($value['title']);
-        $videos->setDuration(100);
+        $videos->setDuration(0);
         file_put_contents($global['systemRootPath'] . "videos/{$filename}.jpg", url_get_contents($global['webSiteRootURL']."plugin/Wasaaa/Wasaaa.jpg"));
         $videos->setVideoLink($value['link']);
         $videos->setType('linkVideo');
