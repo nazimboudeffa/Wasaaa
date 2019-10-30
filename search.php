@@ -100,8 +100,6 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
                   $("input:checkbox[name=videoCheckbox]:checked").each(function () {
                       videoLink.push($(this).val());
                   });
-                  console.log(videoLink);
-                  console.log(buck);
                   saveIt(videoLink);
               });
             });
@@ -118,7 +116,6 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
                   o.title = videoLink[x];
                   o.link = 'https://s3.' + '<?php echo $obj->REGION; ?>' + '.wasabisys.com/' + buck + '/' + videoLink[x];
                   objectsToSave.push(o);
-                  console.log(objectsToSave);
                 }
                 $.ajax({
                     url: '<?php echo $global['webSiteRootURL']; ?>plugin/Wasaaa/save.json.php',
