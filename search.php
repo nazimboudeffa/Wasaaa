@@ -103,7 +103,7 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
                     <form id="search-form" name="search-form" onsubmit="return search()">
                         <div id="custom-search-input">
                             <div class="input-group col-md-12">
-                                <input type="search" id="query" class="form-control input-lg" placeholder="Search YouTube / PlayList URL" />
+                                <input type="search" id="query" class="form-control input-lg" placeholder="Search Your Wasabi Buckets" />
                                 <span class="input-group-btn">
                                     <button class="btn btn-info btn-lg" type="submit">
                                         <i class="glyphicon glyphicon-search"></i>
