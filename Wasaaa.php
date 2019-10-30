@@ -26,6 +26,7 @@ class Wasaaa extends PluginAbstract {
 
     public function getEmptyDataObject() {
         $obj = new stdClass();
+        $obj->onlyAdminCanWasabiEmbed = true;
         $obj->API_KEY = 'Your Wasabi Generated Key';
         $obj->API_SECRET = 'Your Wasabi Secret Key';
         $obj->REGION = 'us-west-1';
@@ -35,7 +36,7 @@ class Wasaaa extends PluginAbstract {
     public function getUploadMenuButton(){
         global $global;
         $obj = $this->getDataObject();
-        if($obj->onlyAdminCanBulkEmbed && !User::isAdmin()){
+        if($obj->onlyAdminCanWasabiEmbed && !User::isAdmin()){
             return '';
         }
         return '<li><a  href="'.$global['webSiteRootURL'].'plugin/Wasaaa/search.php" ><span class="fa fa-link"></span> '.__("Wasabi Embed").'</a></li>';

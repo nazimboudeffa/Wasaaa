@@ -58,6 +58,8 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
                 secretAccessKey: secretAccessKey
             });
 
+            var buck;
+
             var params = {};
             s3.listBuckets(params, function(err, data) {
              if (err) console.log(err, err.stack);
@@ -84,11 +86,59 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
 
             $(document).ready(function () {
               $('#buckets').on('change', function(){
-                search($('#buckets option:selected').val());
+
+                modal.showPleaseWait();
+
+                setTimeout(function () {
+                  search($('#buckets option:selected').val());
+                  modal.hidePleaseWait();
+                },500);
+
+              });
+              $('#getSelected').click(function () {
+                  var videoLink = new Array();
+                  $("input:checkbox[name=videoCheckbox]:checked").each(function () {
+                      videoLink.push($(this).val());
+                  });
+                  console.log(videoLink);
+                  console.log(buck);
+                  saveIt(videoLink);
               });
             });
 
+            function saveIt(videoLink) {
+              modal.showPleaseWait();
+              setTimeout(function () {
+                var objectsToSave = [];
+                for (x in videoLink) {
+                  if (typeof videoLink[x] === 'function') {
+                              continue;
+                          }
+                  var o = {};
+                  o.title = videoLink[x];
+                  o.link = 'https://s3.' + '<?php echo $obj->REGION; ?>' + '.wasabisys.com/' + buck + '/' + videoLink[x];
+                  objectsToSave.push(o);
+                  console.log(objectsToSave);
+                }
+                $.ajax({
+                    url: '<?php echo $global['webSiteRootURL']; ?>plugin/Wasaaa/save.json.php',
+                    data: {"objectsToSave": objectsToSave},
+                    type: 'post',
+                    success: function (response) {
+                        if (!response.error) {
+                            swal("<?php echo __("Congratulations!"); ?>", "<?php echo __("Your videos have been saved!"); ?>", "success");
+                        } else {
+                            swal("<?php echo __("Sorry!"); ?>", response.msg.join("<br>"), "error");
+                        }
+                        modal.hidePleaseWait();
+                    }
+                });
+              },500);
+            }
+
             function search(bucket){
+
+              buck = bucket;
 
               var params = {
                   Bucket: bucket
@@ -125,7 +175,7 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
               // Build output string
               var output = '<li class="list-group-item">' +
                       '<div class="checkbox">' +
-                      '<label><input class="checkbox-inline" type="checkbox" value="' + title + '" name="videoCheckbox">' + title + '<a target="_blank" href="https://s3.' + '<?php echo $obj->REGION; ?>' + '.wasabisys.com/' + b + '/' + title + '?rel=0"> watch</a></label>' +
+                      '<label><input class="checkbox-inline" type="checkbox" value="' + title + '" name="videoCheckbox">' + title + '<a target="_blank" href="https://s3.' + '<?php echo $obj->REGION; ?>' + '.wasabisys.com/' + b + '/' + title + '?rel=0"> <i class="far fa-play-circle"></i></a></label>' +
                       '</div>' +
                       '</li>' +
                       '';
