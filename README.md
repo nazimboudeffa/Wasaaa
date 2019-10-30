@@ -10,4 +10,4 @@ I don't know why the other regions are not working actually, so it seems that yo
 
 Wasaaa is free like in **free beer**
 
-![Wasaaa](https://media.giphy.com/media/Q74MmGp0xWb5cZJbIF/giphy.gif)
+![Wasaaa](Wasaaa.gif)
