@@ -27,6 +27,7 @@ class Wasaaa extends PluginAbstract {
     public function getEmptyDataObject() {
         $obj = new stdClass();
         $obj->API_KEY = 'Your Wasabi Generated Key';
+        $obj->API_SECRET = 'Your Wasabi Secret Key';
         return $obj;
     }
 

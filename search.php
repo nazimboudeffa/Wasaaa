@@ -9,6 +9,7 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
 <!DOCTYPE html>
 <html lang="<?php echo $_SESSION['language']; ?>">
     <head>
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.558.0.min.js"></script>
         <title><?php echo $config->getWebSiteTitle(); ?>  :: Wasabi Embed</title>
         <?php
         include $global['systemRootPath'] . 'view/include/head.php';
@@ -132,8 +133,34 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
         ?>
         <script>
 
-            var wkey = '<?php echo $obj->API_KEY; ?>';
-            console.log(wkey);
+            var accessKeyId = '<?php echo $obj->API_KEY; ?>';
+            var secretAccessKey = '<?php echo $obj->API_SECRET; ?>';
+
+            var wasabiEndpoint = new AWS.Endpoint('s3.wasabisys.com');
+            var s3 = new AWS.S3({
+                signatureVersion: 'v2',
+                endpoint: wasabiEndpoint,
+                accessKeyId: accessKeyId,
+                secretAccessKey: secretAccessKey
+            });
+
+            var params = {
+                Bucket: 'bledtube'
+            };
+
+            s3.listObjectsV2(params, function (err, data) {
+                if (!err) {
+                    var files = []
+                    data.Contents.forEach(function (element) {
+                        files.push({
+                            filename: element.Key
+                        });
+                    });
+                    console.log(files)
+                } else {
+                    console.log(err);  // an error ocurred
+                }
+            });
 
         </script>
     </body>
