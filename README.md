@@ -4,7 +4,7 @@ Wasaaa is a plugin for YouPHPTube to let you access your videos stored on Wasabi
 
 ## Usage
 
-I don't know why the other regions are not working actually, so it seems that if you have to create your buckets in *us-west-1* and let the REGION option as is, it works, and it works the same way for any other REGION just by letting the option as in the plugin. If you have any idea about this feature please let me know
+For a complete explanation on how to use this plugin and what are the limitation of the licence, please read [my article on medium](https://medium.com/@nazimboudeffa/wasabi-plugin-for-youphptube-6f024cf12ff1?source=friends_link&sk=a6f3c6f3f0b79618fd17f148a26000d3)
 
 ## About
 
