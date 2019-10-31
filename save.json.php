@@ -1,5 +1,6 @@
 <?php
 
+//error_reporting(0);
 header('Content-Type: application/json');
 if (!isset($global['systemRootPath'])) {
     require_once '../../videos/configuration.php';
@@ -31,7 +32,7 @@ if (empty($objo) || ($objo->onlyAdminCanWasabiEmbed && !User::isAdmin())) {
         $videos->setTitle($value['title']);
         $videos->setDescription("");
         $videos->setClean_title($value['title']);
-        $videos->setDuration(0);
+        $videos->setDuration(secondsToVideoTime($value['duration']));
         file_put_contents($global['systemRootPath'] . "videos/{$filename}.jpg", url_get_contents($global['webSiteRootURL']."plugin/Wasaaa/Wasaaa.jpg"));
         $videos->setVideoLink($value['link']);
         $videos->setType('linkVideo');

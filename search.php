@@ -59,6 +59,7 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
             });
 
             var buck;
+            var vids = [];
 
             var params = {};
             s3.listBuckets(params, function(err, data) {
@@ -113,6 +114,13 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
                               continue;
                           }
                   var o = {};
+
+                  for (i=0; i<vids.length; i++){
+                    if (vids[i].id == "myVideo-"+videoLink[x]){
+                      o.duration = vids[i].duration;
+                    }
+                  }
+
                   o.title = videoLink[x];
                   o.link = 'https://s3.' + '<?php echo $obj->REGION; ?>' + '.wasabisys.com/' + buck + '/' + videoLink[x];
                   objectsToSave.push(o);
@@ -157,6 +165,12 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
                           var output = getOutput(bucket, file);
                           // display results
                           $('#results').append(output);
+
+                          // Get duration of video
+                          var myVideoPlayer = document.getElementById("myVideo-"+file.filename);
+                          myVideoPlayer.addEventListener('loadedmetadata', function () {
+                              vids.push(myVideoPlayer);
+                          });
                       });
 
                   } else {
@@ -167,10 +181,14 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
             }
 
             function getOutput(b, f) {
-
               var title = f.filename;
               // Build output string
               var output = '<li class="list-group-item">' +
+                      '<video id="myVideo-' + title + '" width="320" height="176" controls>' +
+                        '<source src="https://s3.' + '<?php echo $obj->REGION; ?>' + '.wasabisys.com/' + b + '/' + title + '?rel=0" type="video/mp4">' +
+                        'Your browser does not support HTML5 video.' +
+                      '</video>' +
+                      '<div id="duration"></div>' +
                       '<div class="checkbox">' +
                       '<label><input class="checkbox-inline" type="checkbox" value="' + title + '" name="videoCheckbox">' + title + '<a target="_blank" href="https://s3.' + '<?php echo $obj->REGION; ?>' + '.wasabisys.com/' + b + '/' + title + '?rel=0"> <i class="far fa-play-circle"></i></a></label>' +
                       '</div>' +
