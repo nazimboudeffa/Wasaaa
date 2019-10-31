@@ -8,6 +8,6 @@ I don't know why the other regions are not working actually, so it seems that yo
 
 ## About
 
-Wasaaa is free like in **free beer**
+Wasaaa is free like in **free beer** or [name your own price](https://gum.co/lpwZh)
 
 ![Wasaaa](Wasaaa.gif)
