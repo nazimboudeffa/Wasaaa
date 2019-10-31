@@ -188,7 +188,6 @@ $obj = YouPHPTubePlugin::getObjectData("Wasaaa");
                         '<source src="https://s3.' + '<?php echo $obj->REGION; ?>' + '.wasabisys.com/' + b + '/' + title + '?rel=0" type="video/mp4">' +
                         'Your browser does not support HTML5 video.' +
                       '</video>' +
-                      '<div id="duration"></div>' +
                       '<div class="checkbox">' +
                       '<label><input class="checkbox-inline" type="checkbox" value="' + title + '" name="videoCheckbox">' + title + '<a target="_blank" href="https://s3.' + '<?php echo $obj->REGION; ?>' + '.wasabisys.com/' + b + '/' + title + '?rel=0"> <i class="far fa-play-circle"></i></a></label>' +
                       '</div>' +
