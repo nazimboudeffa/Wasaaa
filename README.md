@@ -10,4 +10,4 @@ I don't know why the other regions are not working actually, so it seems that yo
 
 Wasaaa is free like in **free beer** or [name your own price](https://gum.co/lpwZh)
 
-![Wasaaa](Wasaaa.gif)
+[![Wasaaa](Wasaaa.gif)](https://fr.tipeee.com/nazimboudeffa#reward-300065)
